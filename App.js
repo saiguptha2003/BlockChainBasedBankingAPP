@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// In App.js in a new project
+import * as React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Signup from './myComponents/signup'
+import { NavigationContainer } from "@react-navigation/native";
+import Dashboard from "./myComponents/DashBoard";
+import qrcodeView from "./myComponents/QrcodeView";
+const serverIPAddress = '192.168.43.154';
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator  screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Signin" component={signin} />
+            <Stack.Screen name="Signup" component={Signup} />
+
+
+          <Stack.Screen name="QRCODE" component={qrcodeView} />
+
+          <Stack.Screen name="QrcodeView" component={qrcodeView} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { AppRegistry } from 'react-native';
+import signin from "./myComponents/signin";
+AppRegistry.registerComponent('YourAppName', () => App); // Register the main component
+export default App;
